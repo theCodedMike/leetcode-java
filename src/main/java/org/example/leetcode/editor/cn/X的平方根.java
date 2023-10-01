@@ -35,11 +35,11 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int mySqrt(int x) {
-        //return this.binary_search_1(x);
-        return this.binary_search_2(x);
+        //return this.binarySearch1(x);
+        return this.binarySearch2(x);
     }
 
-    public int binary_search_1(int x) {
+    public int binarySearch1(int x) {
         long len = (long)x;
         long left = 0;
         long right = len + 1; // 左闭右开，right需要为len+1
@@ -59,7 +59,7 @@ class Solution {
         return (int) (left - 1);
     }
 
-    public int binary_search_2(int x) {
+    public int binarySearch2(int x) {
         long len = (long)x;
         long left = 0;
         long right = len;
