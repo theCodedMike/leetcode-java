@@ -1,5 +1,4 @@
-package org.example.leetcode.editor.cn;
-//给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
+//给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。 
 //
 // 
 // 
@@ -39,15 +38,17 @@ package org.example.leetcode.editor.cn;
 // 请你设计时间复杂度为 O(n) 的算法解决本问题 
 // 
 //
-// Related Topics 数组 双指针 排序 👍 899 👎 0
+// Related Topics 数组 双指针 排序 👍 901 👎 0
 
-//leetcode submit region begin(Prohibit modification and deletion)
+
 import java.util.Arrays;
 
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] sortedSquares(int[] nums) {
         //return this.bruteForce(nums);
-        return this.two_pointers(nums);
+        //return this.two_pointers_1(nums);
+        return this.two_pointers_2(nums);
     }
 
     public int[] bruteForce(int[] nums) {
@@ -58,7 +59,7 @@ class Solution {
         return nums;
     }
 
-    public int[] two_pointers(int[] nums) {
+    public int[] two_pointers_1(int[] nums) {
         int[] res = new int[nums.length];
         int left = 0;
         int right = nums.length - 1;
@@ -87,6 +88,25 @@ class Solution {
                 }
                 idx--;
                 left++;
+                right--;
+            }
+        }
+
+        return res;
+    }
+
+    public int[] two_pointers_2(int[] nums) {
+        int[] res = new int[nums.length];
+
+        for (int idx = nums.length - 1, left = 0, right = nums.length - 1; left <= right;) {
+            int square_of_left = nums[left] * nums[left];
+            int square_of_right = nums[right] * nums[right];
+
+            if (square_of_left > square_of_right) {
+                res[idx--] = square_of_left;
+                left++;
+            } else {
+                res[idx--] = square_of_right;
                 right--;
             }
         }
