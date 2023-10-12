@@ -47,8 +47,8 @@ import java.util.Arrays;
 class Solution {
     public int[] sortedSquares(int[] nums) {
         //return this.bruteForce(nums);
-        //return this.two_pointers_1(nums);
-        return this.two_pointers_2(nums);
+        //return this.twoPointers1(nums);
+        return this.twoPointers2(nums);
     }
 
     public int[] bruteForce(int[] nums) {
@@ -59,7 +59,7 @@ class Solution {
         return nums;
     }
 
-    public int[] two_pointers_1(int[] nums) {
+    public int[] twoPointers1(int[] nums) {
         int[] res = new int[nums.length];
         int left = 0;
         int right = nums.length - 1;
@@ -95,7 +95,7 @@ class Solution {
         return res;
     }
 
-    public int[] two_pointers_2(int[] nums) {
+    public int[] twoPointers2(int[] nums) {
         int[] res = new int[nums.length];
 
         for (int idx = nums.length - 1, left = 0, right = nums.length - 1; left <= right;) {
