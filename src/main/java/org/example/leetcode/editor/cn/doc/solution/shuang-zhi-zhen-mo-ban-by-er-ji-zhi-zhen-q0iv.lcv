@@ -1,0 +1,44 @@
+> Problem: [904. 水果成篮](https://leetcode.cn/problems/fruit-into-baskets/description/)
+
+[TOC]
+
+# 思路
+
+- 双指针模版
+
+# 解题方法
+
+- 注意使用Counter(), 需要维护键值的删除,不然会超时:
+- 
+
+  * []
+
+  ```Python
+  if not s[fruits[l]]:
+     del s[fruits[l]]
+
+
+  ```
+
+# Code
+
+* []
+
+```Python
+
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        s=Counter()
+        l=0
+        ans=1
+        for r,c in enumerate(fruits):
+            s[c]+=1
+            while len(s)>2:
+                s[fruits[l]]-=1
+                if not s[fruits[l]]:
+                    del s[fruits[l]]
+                l+=1
+            ans=max(ans, r-l+1)
+        return ans
+```
+

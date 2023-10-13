@@ -1,0 +1,73 @@
+* 
+
+```
+class Solution {
+    public int totalFruit(int[] fruits) {
+        // 只有两个篮子，并且每个篮子只装一种类型
+        int[][] blankets = new int[2][2];
+        // 初始化空篮子
+        blankets[0][0]=-1;
+        blankets[1][0]=-1;
+        // 初始化每个篮子装的数目，为0
+        blankets[0][1]=0;
+        blankets[1][1]=0;
+        int left=0;
+        int right;
+        int ans=0;
+
+        // 装入第一棵树的水果
+        blankets[0][0]=fruits[left];
+        for (right=0;right<fruits.length;right++){
+
+            // 匹配第一个篮子装的，则装入第一个篮子
+            if (blankets[0][0]==fruits[right]){
+                blankets[0][1]++;
+            }
+
+            // 匹配第二个篮子装的，则装入第二个篮子
+            if (blankets[1][0]==fruits[right]){
+                blankets[1][1]++;
+            }
+
+            // 第二个篮子没装，且right指向了不同的种类
+            if (blankets[1][0]==-1 && blankets[0][0]!=fruits[right]){
+                // 装篮
+                blankets[1][0]=fruits[right];
+                blankets[1][1]++;
+            }
+
+            // 出现第三个品种
+            if (blankets[0][0]!=fruits[right] && blankets[1][0]!=fruits[right]){
+                ans=Math.max(ans,blankets[0][1]+blankets[1][1]);
+                // left开始扫描，进行剔除，直到有一个篮子空了
+                while (blankets[0][1]>0 && blankets[1][1]>0){
+                    if (blankets[0][0]==fruits[left]){
+                        blankets[0][1]--;
+                    }
+                    if (blankets[1][0]==fruits[left]){
+                        blankets[1][1]--;
+                    }
+                    left++;
+                }
+                // 如果第1个篮子空了，则两个篮子调换
+                if (blankets[0][1]==0){
+                    blankets[0][0]=blankets[1][0];
+                    blankets[0][1]=blankets[1][1];
+                    blankets[1][0]=fruits[right];
+                    blankets[1][1]=1;
+                }
+                if (blankets[1][1]==0){
+                    blankets[1][0]=fruits[right];
+                    blankets[1][1]=1;
+                }
+            }
+
+        }
+
+        return Math.max(ans,right-left);
+        
+
+    }
+}
+```
+
