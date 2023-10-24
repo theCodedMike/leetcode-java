@@ -60,7 +60,7 @@ package org.example.leetcode.editor.cn;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _27_移除元素 {
     public int removeElement(int[] nums, int val) {
         //return this.two_pointers_1(nums, val);
         return this.two_pointers_2(nums, val);

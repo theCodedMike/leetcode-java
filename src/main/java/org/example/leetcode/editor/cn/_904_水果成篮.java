@@ -63,7 +63,7 @@ package org.example.leetcode.editor.cn;
 import java.util.HashMap;
 import java.util.HashSet;
 
-class Solution {
+class _904_水果成篮 {
     public int totalFruit(int[] fruits) {
         //return this.bruteForce(fruits);
         return this.slidingWindow(fruits);

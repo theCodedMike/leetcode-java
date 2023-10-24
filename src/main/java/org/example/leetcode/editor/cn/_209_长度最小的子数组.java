@@ -52,7 +52,7 @@ package org.example.leetcode.editor.cn;
 import java.util.Arrays;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _209_长度最小的子数组 {
     public int minSubArrayLen(int target, int[] nums) {
         //return this.bruteForce(target, nums);
         //return this.usingBinarySearch(target, nums);

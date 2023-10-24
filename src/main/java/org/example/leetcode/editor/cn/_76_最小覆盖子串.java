@@ -56,7 +56,7 @@ package org.example.leetcode.editor.cn;
 import java.util.HashMap;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _76_最小覆盖子串 {
     public String minWindow(String s, String t) {
         HashMap<Character, Integer> map2 = new HashMap<>();
         for (int i = 0, len = t.length(); i < len; i++) {

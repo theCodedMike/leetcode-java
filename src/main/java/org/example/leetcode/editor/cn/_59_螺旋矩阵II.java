@@ -29,7 +29,7 @@ package org.example.leetcode.editor.cn;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _59_螺旋矩阵II {
     public int[][] generateMatrix(int n) {
         //return this.simulate(n);
         return this.simulateByLayer(n);

@@ -38,18 +38,11 @@ package org.example.leetcode.editor.cn;
 /**
  * Definition for singly-linked list.
  */
-public class ListNode {
-     int val;
-     ListNode next;
-     ListNode() {}
-     ListNode(int val) { this.val = val; }
-     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- }
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-class Solution {
+class _24_两两交换链表中的节点 {
     public ListNode swapPairs(ListNode head) {
         //return this.iterationHelper(head);
         return this.recursionHelper(head);

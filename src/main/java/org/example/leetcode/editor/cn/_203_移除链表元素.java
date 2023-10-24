@@ -39,17 +39,8 @@ package org.example.leetcode.editor.cn;
 /**
  * Definition for singly-linked list.
  */
-public class ListNode {
-    int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-}
-
-
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _203_移除链表元素 {
     public ListNode removeElements(ListNode head, int val) {
         return this.iterationHelper(head, val);
         //return this.recursionHelper(head, val);

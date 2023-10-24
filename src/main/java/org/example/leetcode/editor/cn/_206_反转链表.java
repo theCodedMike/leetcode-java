@@ -46,14 +46,14 @@ package org.example.leetcode.editor.cn;
 /**
  * Definition for singly-linked list.
  */
-public class ListNode {
-     int val;
-     ListNode next;
-}
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _206_反转链表 {
+    static class ListNode {
+        int val;
+        ListNode next;
+    }
     public ListNode reverseList(ListNode head) {
         return this.iterationHelper(head);
         //return this.recursionHelper(null, head);
