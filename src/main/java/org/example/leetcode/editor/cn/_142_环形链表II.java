@@ -83,7 +83,6 @@ public class Solution {
     ListNode twoPointers(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
-        ListNode temp = head;
 
         while (fast != null) {
             fast = fast.next;
@@ -94,11 +93,11 @@ public class Solution {
             slow = slow.next;
 
             if (fast == slow) {
-                while (temp != slow) {
-                    temp = temp.next;
+                fast = head;
+                while (fast != slow) {
+                    fast = fast.next;
                     slow = slow.next;
                 }
-                fast = temp;
                 break;
             }
         }
