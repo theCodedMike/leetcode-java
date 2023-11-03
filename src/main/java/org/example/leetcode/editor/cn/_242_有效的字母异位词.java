@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.stream.Stream;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _242_有效的字母异位词 {
     public boolean isAnagram(String s, String t) {
         //return this.sortThenCompare(s, t);
         return this.useHashMap(s, t);

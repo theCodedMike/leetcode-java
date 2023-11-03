@@ -41,7 +41,7 @@ package org.example.leetcode.editor.cn;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _383_赎金信 {
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] arr = new int[26];
         for (char c : magazine.toCharArray()) {

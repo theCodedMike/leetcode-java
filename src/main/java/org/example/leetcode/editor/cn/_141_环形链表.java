@@ -58,7 +58,7 @@ package org.example.leetcode.editor.cn;
 import java.util.HashSet;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-public class Solution {
+public class _141_环形链表 {
     public boolean hasCycle(ListNode head) {
         //return this.useHashSet(head);
         return this.twoPointers(head);

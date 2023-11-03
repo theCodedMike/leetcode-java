@@ -97,7 +97,7 @@ import java.util.HashSet;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-public class Solution {
+public class _160_相交链表 {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         //return this.useHashSet(headA, headB);
         return this.twoPointers(headA, headB);
