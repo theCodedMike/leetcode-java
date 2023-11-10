@@ -47,7 +47,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _202_快乐数 {
     public boolean isHappy(int n) {
         //return this.useHash(n);
         return this.slowFastPointers(n);

@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _349_两个数组的交集 {
     public int[] intersection(int[] nums1, int[] nums2) {
         //return this.useHash(nums1, nums2);
         return this.sorting(nums1, nums2);

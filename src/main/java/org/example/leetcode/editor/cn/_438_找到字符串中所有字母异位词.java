@@ -43,7 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _438_找到字符串中所有字母异位词 {
     public List<Integer> findAnagrams(String s, String p) {
         //return this.slidingWindow(s, p);
         return this.optimizeSlidingWindow(s, p);
