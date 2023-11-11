@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.Map;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _350_两个数组的交集II {
     public int[] intersect(int[] nums1, int[] nums2) {
         //return this.bruteForce(nums1, nums2);
         //return this.useHash(nums1, nums2);
