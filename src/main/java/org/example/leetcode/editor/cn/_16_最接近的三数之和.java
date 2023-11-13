@@ -49,7 +49,10 @@ public class _16_最接近的三数之和 {
 
         int best = Integer.MAX_VALUE / 2;
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length - 1; j++) { // CAUTiON: here
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            for (int j = i + 1; j < nums.length - 1; j++) {
                 int third = target - nums[i] - nums[j];
                 int k = Arrays.binarySearch(nums, j + 1, nums.length, third);
                 if (k >= 0) {
@@ -61,7 +64,7 @@ public class _16_最接近的三数之和 {
                 } else if (k == nums.length) {
                     k--;
                 } else {
-                    if (Math.abs(third -  nums[k - 1]) < Math.abs(nums[k] - third)) {
+                    if ((third - nums[k - 1]) < (nums[k] - third)) {
                         k--;
                     }
                 }
@@ -92,7 +95,7 @@ public class _16_最接近的三数之和 {
                 }
                 if (sum > target) {
                     right--;
-                } else if (sum < target){
+                } else if (sum < target) {
                     left++;
                 } else {
                     return best;
