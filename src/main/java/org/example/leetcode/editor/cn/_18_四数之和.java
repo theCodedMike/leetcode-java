@@ -44,7 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _18_四数之和 {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         //return this.sortingThen2Pointers(nums, target);
         return this.sortingThen4Pointers(nums, target);
