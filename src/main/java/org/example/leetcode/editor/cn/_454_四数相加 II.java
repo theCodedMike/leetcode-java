@@ -53,9 +53,12 @@ class Solution {
         return this.useHash(nums1, nums2, nums3, nums4);
     }
 
+    /// Time Complexity: O(n^2)
+    ///
+    /// Space Complexity: O(n^2)
     int useHash(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
         int len = nums1.length;
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>(len * len);
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 int key = nums1[i] + nums2[j];
