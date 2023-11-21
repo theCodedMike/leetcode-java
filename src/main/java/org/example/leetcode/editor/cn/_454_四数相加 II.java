@@ -48,7 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _454_四数相加II {
     public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
         return this.useHash(nums1, nums2, nums3, nums4);
     }

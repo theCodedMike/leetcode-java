@@ -34,7 +34,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _344_反转字符串 {
     public void reverseString(char[] s) {
         this.twoPointers(s);
     }

@@ -38,7 +38,7 @@ package org.example.leetcode.editor.cn;
 import java.util.Arrays;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _541_反转字符串II {
     public String reverseStr(String s, int k) {
         return this.twoPointers(s, k);
     }
