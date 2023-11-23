@@ -59,7 +59,7 @@ import java.util.stream.Collectors;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class _151_反转字符串中的单词 {
     @FunctionalInterface
     interface TriConsumer<T1, T2, T3> {
         void accept(T1 t1, T2 t2, T3 t3);
