@@ -32,56 +32,66 @@ package org.example.leetcode.editor.cn;
 //
 // Related Topics 双指针 字符串 字符串匹配 👍 2087 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
+import java.util.function.Function;
+
 class _28_找出字符串中第一个匹配项的下标 {
     public int strStr(String haystack, String needle) {
         //return this.bruteForce(haystack, needle);
         return this.kmp(haystack, needle);
     }
 
+    // Time Complexity: O(m * n)
+    //
+    // Space Complexity: O(1)
     int bruteForce(String haystack, String needle) {
         int n = haystack.length();
         int m = needle.length();
-        int start = 0;
-        int end = m;
 
-        while (end <= n) {
+
+        for (int end = m; end <= n; end++) {
             boolean allEqual = true;
-            for (int i = start; i < end; i++) {
-                if (haystack.charAt(i) != needle.charAt(i - start)) {
+            for (int i = end - m; i < end; i++) {
+                if (haystack.charAt(i) != needle.charAt(i - end + m)) {
                     allEqual = false;
                     break;
                 }
             }
             if (allEqual) {
-                return start;
+                return end - m;
             }
-
-            start++;
-            end = start + m;
         }
 
         return -1;
     }
 
-    int kmp(String haystack, String needle) {
+    Function<String, int[]> getNext = (needle) -> {
         int m = needle.length();
-        int[] pi = new int[m];
+        int[] next = new int[m];
+
         for (int i = 1, j = 0; i < m; i++) {
             while (j > 0 && needle.charAt(i) != needle.charAt(j)) {
-                j = pi[j - 1];
+                j = next[j - 1];
             }
             if (needle.charAt(i) == needle.charAt(j)) {
                 j++;
             }
-            pi[i] = j;
+            next[i] = j;
         }
 
+        return next;
+    };
+
+    // Time Complexity: O(m + n)
+    //
+    // Space Complexity: O(m)
+    int kmp(String haystack, String needle) {
+        int[] next = this.getNext.apply(needle);
         int n = haystack.length();
+        int m = needle.length();
         for (int i = 0, j = 0; i < n; i++) {
             while (j > 0 && haystack.charAt(i) != needle.charAt(j)) {
-                j = pi[j - 1];
+                j = next[j - 1];
             }
             if (haystack.charAt(i) == needle.charAt(j)) {
                 j++;
