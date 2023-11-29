@@ -59,8 +59,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 class MyStack2 {
-    Deque<Integer> q1;
-    Deque<Integer> q2;
+    private Deque<Integer> q1;
+    private Deque<Integer> q2;
 
     public MyStack2() {
         this.q1 = new ArrayDeque<>();
@@ -104,7 +104,7 @@ class MyStack2 {
 
 //leetcode submit region begin(Prohibit modification and deletion)
 public class MyStack {
-    Deque<Integer> q1;
+    private Deque<Integer> q1;
 
     public MyStack() {
         this.q1 = new ArrayDeque<>();
