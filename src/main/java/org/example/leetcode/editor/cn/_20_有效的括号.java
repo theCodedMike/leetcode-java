@@ -64,6 +64,9 @@ class _20_有效的括号 {
         default -> false;
     };
 
+    // Time Complexity: O(n)
+    //
+    // Space Complexity: O(n)
     boolean useStack(String s) {
         Deque<Character> stack = new ArrayDeque<>();
 
@@ -88,6 +91,9 @@ class _20_有效的括号 {
         return stack.isEmpty();
     }
 
+    // Time Complexity: O(n)
+    //
+    // Space Complexity: O(n + ∣Σ∣)
     boolean optimizeUseStack(String s) {
         Deque<Character> stack = new ArrayDeque<>();
         Map<Character, Character> map = new HashMap<>() {{
