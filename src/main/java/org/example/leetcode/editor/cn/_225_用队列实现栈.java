@@ -103,7 +103,7 @@ class MyStack2 {
 }
 
 //leetcode submit region begin(Prohibit modification and deletion)
-public class MyStack {
+class MyStack {
     private Deque<Integer> q1;
 
     public MyStack() {
