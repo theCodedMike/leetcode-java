@@ -1,0 +1,175 @@
+package org.example.leetcode.editor.cn;
+//给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
+//
+// 
+//
+// 示例 1： 
+// 
+// 
+//输入：root = [1,null,2,3]
+//输出：[1,2,3]
+// 
+//
+// 示例 2： 
+//
+// 
+//输入：root = []
+//输出：[]
+// 
+//
+// 示例 3： 
+//
+// 
+//输入：root = [1]
+//输出：[1]
+// 
+//
+// 示例 4： 
+// 
+// 
+//输入：root = [1,2]
+//输出：[1,2]
+// 
+//
+// 示例 5： 
+// 
+// 
+//输入：root = [1,null,2]
+//输出：[1,2]
+// 
+//
+// 
+//
+// 提示： 
+//
+// 
+// 树中节点数目在范围 [0, 100] 内 
+// -100 <= Node.val <= 100 
+// 
+//
+// 
+//
+// 进阶：递归算法很简单，你可以通过迭代算法完成吗？ 
+//
+// Related Topics 栈 树 深度优先搜索 二叉树 👍 1186 👎 0
+
+
+//leetcode submit region begin(Prohibit modification and deletion)
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+import java.util.Stack;
+
+public class _144_二叉树的前序遍历 {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        //List<Integer> res = new ArrayList<>();
+        //this.recursionImpl(root, res);
+        //return res;
+
+        //return this.iterationImpl1(root);
+        //return this.iterationImpl2(root);
+        //return this.iterationImpl3(root);
+        return this.iterationImpl4(root);
+    }
+
+    void recursionImpl(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+
+        res.add(root.val); // 访问根节点
+        this.recursionImpl(root.left, res);  // 遍历左子树
+        this.recursionImpl(root.right, res); // 遍历右子树
+    }
+
+    List<Integer> iterationImpl1(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+        if (root != null) {
+            Deque<TreeNode> stack = new ArrayDeque<>() {{
+                this.push(root);
+            }};
+
+            while (!stack.isEmpty()) {
+                TreeNode curr = stack.pop();
+                res.add(curr.val);
+
+                if (curr.right != null) {
+                    stack.push(curr.right);
+                }
+                if (curr.left != null) {
+                    stack.push(curr.left);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    List<Integer> iterationImpl2(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                res.add(root.val);
+                stack.push(root);
+                root = root.left;
+            }
+
+            TreeNode curr = stack.pop();
+            root = curr.right;
+        }
+
+        return res;
+    }
+
+    List<Integer> iterationImpl3(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+
+        while (root != null || !stack.isEmpty()) {
+            if (root != null) {
+                res.add(root.val);
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode curr = stack.pop();
+                root = curr.right;
+            }
+        }
+
+        return res;
+    }
+
+    List<Integer> iterationImpl4(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+        if (root != null) {
+            Stack<TreeNode> stack = new Stack<>() {{
+                this.push(root);
+            }};
+            while (!stack.isEmpty()) {
+                TreeNode curr = stack.pop();
+                if (curr != null) {
+                    if (curr.right != null) {
+                        stack.push(curr.right);
+                    }
+                    if (curr.left != null) {
+                        stack.push(curr.left);
+                    }
+                    stack.push(curr);
+                    stack.push(null);
+                } else {
+                    TreeNode top = stack.pop();
+                    res.add(top.val);
+                }
+            }
+        }
+
+        return res;
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
