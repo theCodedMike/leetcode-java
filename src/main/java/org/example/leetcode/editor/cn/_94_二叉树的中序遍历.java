@@ -1,5 +1,5 @@
 package org.example.leetcode.editor.cn;
-//给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
+//给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
 //
 // 
 //
@@ -7,7 +7,7 @@ package org.example.leetcode.editor.cn;
 // 
 // 
 //输入：root = [1,null,2,3]
-//输出：[1,2,3]
+//输出：[1,3,2]
 // 
 //
 // 示例 2： 
@@ -24,20 +24,6 @@ package org.example.leetcode.editor.cn;
 //输出：[1]
 // 
 //
-// 示例 4： 
-// 
-// 
-//输入：root = [1,2]
-//输出：[1,2]
-// 
-//
-// 示例 5： 
-// 
-// 
-//输入：root = [1,null,2]
-//输出：[1,2]
-// 
-//
 // 
 //
 // 提示： 
@@ -49,9 +35,9 @@ package org.example.leetcode.editor.cn;
 //
 // 
 //
-// 进阶：递归算法很简单，你可以通过迭代算法完成吗？ 
+// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？ 
 //
-// Related Topics 栈 树 深度优先搜索 二叉树 👍 1186 👎 0
+// Related Topics 栈 树 深度优先搜索 二叉树 👍 1984 👎 0
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -60,18 +46,16 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
-public class _144_二叉树的前序遍历 {
-    public List<Integer> preorderTraversal(TreeNode root) {
+public class _94_二叉树的中序遍历 {
+    public List<Integer> inorderTraversal(TreeNode root) {
         //List<Integer> res = new ArrayList<>();
         //this.recursionImpl(root, res);
         //return res;
 
         //return this.iterationImpl1(root);
         //return this.iterationImpl2(root);
-        //return this.iterationImpl3(root);
-        return this.iterationImpl4(root);
+        return this.iterationImpl3(root);
     }
 
     void recursionImpl(TreeNode root, List<Integer> res) {
@@ -79,30 +63,24 @@ public class _144_二叉树的前序遍历 {
             return;
         }
 
-        res.add(root.val); // 访问根节点
-        this.recursionImpl(root.left, res);  // 遍历左子树
-        this.recursionImpl(root.right, res); // 遍历右子树
+        this.recursionImpl(root.left, res);
+        res.add(root.val);
+        this.recursionImpl(root.right, res);
     }
 
     List<Integer> iterationImpl1(TreeNode root) {
         List<Integer> res = new ArrayList<>();
 
-        if (root != null) {
-            Deque<TreeNode> stack = new ArrayDeque<>() {{
-                this.push(root);
-            }};
-
-            while (!stack.isEmpty()) {
-                TreeNode curr = stack.pop();
-                res.add(curr.val);
-
-                if (curr.right != null) {
-                    stack.push(curr.right);
-                }
-                if (curr.left != null) {
-                    stack.push(curr.left);
-                }
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
             }
+
+            TreeNode curr = stack.pop();
+            root = curr.right;
+            res.add(curr.val);
         }
 
         return res;
@@ -110,41 +88,23 @@ public class _144_二叉树的前序遍历 {
 
     List<Integer> iterationImpl2(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        Deque<TreeNode> stack = new ArrayDeque<>();
 
+        Deque<TreeNode> stack = new ArrayDeque<>();
         while (root != null || !stack.isEmpty()) {
-            while (root != null) {
-                res.add(root.val);
+            if (root != null) {
                 stack.push(root);
                 root = root.left;
+            } else {
+                TreeNode curr = stack.pop();
+                root = curr.right;
+                res.add(curr.val);
             }
-
-            TreeNode curr = stack.pop();
-            root = curr.right;
         }
 
         return res;
     }
 
     List<Integer> iterationImpl3(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        Deque<TreeNode> stack = new ArrayDeque<>();
-
-        while (root != null || !stack.isEmpty()) {
-            if (root != null) {
-                res.add(root.val);
-                stack.push(root);
-                root = root.left;
-            } else {
-                TreeNode curr = stack.pop();
-                root = curr.right;
-            }
-        }
-
-        return res;
-    }
-
-    List<Integer> iterationImpl4(TreeNode root) {
         List<Integer> res = new ArrayList<>();
 
         if (root != null) {
@@ -157,18 +117,19 @@ public class _144_二叉树的前序遍历 {
                         if (node.right != null) {
                             stack.push(node.right);
                         }
+                        stack.push(node.val);
                         if (node.left != null) {
                             stack.push(node.left);
                         }
-                        stack.push(node.val);
                     }
                     case Integer val -> res.add(val);
-                    default -> throw new IllegalStateException("Unexpected value: " + stack.pop());
+                    default -> throw new IllegalStateException("Unexpected value: " + curr);
                 }
             }
         }
 
         return res;
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
