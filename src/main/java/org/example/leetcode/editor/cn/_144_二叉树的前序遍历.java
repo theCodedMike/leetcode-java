@@ -60,7 +60,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 public class _144_二叉树的前序遍历 {
     public List<Integer> preorderTraversal(TreeNode root) {
@@ -152,7 +151,8 @@ public class _144_二叉树的前序遍历 {
                 this.push(root);
             }};
             while (!stack.isEmpty()) {
-                switch (stack.pop()) {
+                Object curr = stack.pop();
+                switch (curr) {
                     case TreeNode node -> {
                         if (node.right != null) {
                             stack.push(node.right);
@@ -163,7 +163,7 @@ public class _144_二叉树的前序遍历 {
                         stack.push(node.val);
                     }
                     case Integer val -> res.add(val);
-                    default -> throw new IllegalStateException("Unexpected value: " + stack.pop());
+                    default -> throw new IllegalStateException("Unexpected value: " + curr);
                 }
             }
         }
