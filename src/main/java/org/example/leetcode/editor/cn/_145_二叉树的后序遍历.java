@@ -49,7 +49,7 @@ import java.util.Deque;
 import java.util.List;
 
 
-class Solution {
+public class _145_二叉树的后序遍历 {
     public List<Integer> postorderTraversal(TreeNode root) {
         //List<Integer> res = new ArrayList<>();
         //this.recursionImpl(root, res);
