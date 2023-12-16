@@ -107,7 +107,7 @@ public class _429_N叉树的层序遍历 {
             } else {
                 Node right = curr.children.remove(1);
                 if (curr.children.size() > 1) {
-                    stack.push(new Object[]{ curr, level});
+                    stack.push(new Object[]{curr, level});
                 }
                 root = new Object[]{right, level + 1};
             }
@@ -136,20 +136,22 @@ public class _429_N叉树的层序遍历 {
                 }
                 res.get(level).add(curr.val);
 
-                root = new Object[]{this.isBlank(curr.children) ? null : curr.children.get(0), level + 1};
+                root = new Object[]{null, level + 1};
+                if (!this.isBlank(curr.children)) {
+                    root[0] = curr.children.get(0);
+                }
                 stack.push(new Object[]{curr, level});
             } else {
                 Object[] objs = stack.pop();
                 Node curr = (Node) objs[0];
                 int level = (int) objs[1];
-                if (this.isBlank(curr.children) || curr.children.size() == 1) {
-                    root = new Object[]{null, level + 1};
-                } else {
-                    Node right = curr.children.remove(1);
+
+                root = new Object[]{null, level + 1};
+                if (!this.isBlank(curr.children) && curr.children.size() > 1) {
+                    root[0] = curr.children.remove(1);
                     if (curr.children.size() > 1) {
-                        stack.push(new Object[]{ curr, level});
+                        stack.push(new Object[]{curr, level});
                     }
-                    root = new Object[]{right, level + 1};
                 }
             }
         }
