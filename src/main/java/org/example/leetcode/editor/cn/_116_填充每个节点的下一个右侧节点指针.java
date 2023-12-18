@@ -59,52 +59,72 @@ package org.example.leetcode.editor.cn;
 
 
 import java.util.ArrayDeque;
+import java.util.function.Consumer;
+
+// Definition for a Node
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node next;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
+    }
+};
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-public class _116_填充每个节点的下一个右侧节点指针 {
-    // Definition for a Node.
-    static class Node {
-        public int val;
-        public Node left;
-        public Node right;
-        public Node next;
-
-        public Node() {}
-
-        public Node(int _val) {
-            val = _val;
-        }
-
-        public Node(int _val, Node _left, Node _right, Node _next) {
-            val = _val;
-            left = _left;
-            right = _right;
-            next = _next;
-        }
-    };
+public class Solution {
     public Node connect(Node root) {
         //return this.bfsIter1(root);
         //return this.bfsIter2(root);
-        return useNextPointer(root);
+        //return this.useNextPointerIter(root);
+        return this.useNextPointerRecur(root);
     }
 
-    Node useNextPointer(Node root) {
-        Node curr = root;
-        while (curr != null) {
-            Node level = curr;
-            while (level != null) {
-                if (level.left != null) {
-                    level.left.next = level.right;
-                    if (level.next != null) {
-                        level.right.next = level.next.left;
+    Consumer<Node> preOrder = (root) -> {
+        if (root == null || root.left == null) {
+            return;
+        }
+        root.left.next = root.right;
+        if (root.next != null) {
+            root.right.next = root.next.left;
+        }
+        this.preOrder.accept(root.left);
+        this.preOrder.accept(root.right);
+    };
+
+    Node useNextPointerRecur(Node root) {
+        this.preOrder.accept(root);
+        return root;
+    }
+
+    Node useNextPointerIter(Node root) {
+        Node leftmost = root;
+        while (leftmost != null) {
+            Node curr = leftmost;
+            while (curr != null) {
+                if (curr.left != null) {
+                    curr.left.next = curr.right;
+                    if (curr.next != null) {
+                        curr.right.next = curr.next.left;
                     }
                 }
 
-                level = level.next;
+                curr = curr.next;
             }
 
-            curr = curr.left;
+            leftmost = leftmost.left;
         }
 
         return root;
