@@ -61,30 +61,41 @@ package org.example.leetcode.editor.cn;
 import java.util.ArrayDeque;
 import java.util.function.Consumer;
 
-// Definition for a Node
-class Node {
-    public int val;
-    public Node left;
-    public Node right;
-    public Node next;
-
-    public Node() {}
-
-    public Node(int _val) {
-        val = _val;
-    }
-
-    public Node(int _val, Node _left, Node _right, Node _next) {
-        val = _val;
-        left = _left;
-        right = _right;
-        next = _next;
-    }
-};
-
 //leetcode submit region begin(Prohibit modification and deletion)
 
-public class Solution {
+public class _116_填充每个节点的下一个右侧节点指针 {
+    // Definition for a Node
+    public static class Node {
+        public int val;
+        public Node left;
+        public Node right;
+        public Node next;
+
+        public Node() {}
+        public Node(int _val) {
+            val = _val;
+        }
+        public Node(int _val, Node _left, Node _right, Node _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
+        }
+
+        public static Node node(int val) {
+            return new Node(val);
+        }
+        public static Node nodeWithChildren(int val, Node left, Node right) {
+            return new Node(val, left, right, null);
+        }
+        public static Node nodeWithLeft(int val, Node left) {
+            return new Node(val, left, null, null);
+        }
+        public static Node nodeWithRight(int val, Node right) {
+            return new Node(val, null, right, null);
+        }
+    };
+
     public Node connect(Node root) {
         //return this.bfsIter1(root);
         //return this.bfsIter2(root);
