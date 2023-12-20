@@ -74,14 +74,12 @@ public class _117_填充每个节点的下一个右侧节点指针II {
             }};
             while (!queue.isEmpty()) {
                 int levelSize = queue.size();
-                Node prev = null;
 
-                for (int i = 0; i < levelSize; i++) {
+                for (int i = 1; i <= levelSize; i++) {
                     Node curr = queue.removeFirst();
-                    if (i > 0) {
-                        prev.next = curr;
+                    if (i != levelSize) {
+                        curr.next = queue.peekFirst();
                     }
-                    prev = curr;
 
                     if (curr.left != null) {
                         queue.addLast(curr.left);
@@ -181,6 +179,8 @@ public class _117_填充每个节点的下一个右侧节点指针II {
                 }
             }
         }
+
+        // Here, the order must be right first and then left.
         this.preOrder.accept(curr.right);
         this.preOrder.accept(curr.left);
     };
