@@ -35,11 +35,10 @@ package org.example.leetcode.editor.cn;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
 import java.util.function.BiPredicate;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+public class _101_对称二叉树 {
     public boolean isSymmetric(TreeNode root) {
         //return this.bfsRecur(root);
         //return this.bfsIter(root);
