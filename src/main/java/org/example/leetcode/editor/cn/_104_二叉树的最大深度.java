@@ -37,6 +37,7 @@ package org.example.leetcode.editor.cn;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.function.Function;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 public class _104_二叉树的最大深度 {
@@ -46,11 +47,15 @@ public class _104_二叉树的最大深度 {
         return this.bfsIter2(root);
     }
 
-    int dfsRecur(TreeNode root) {
+    Function<TreeNode, Integer> helper = root -> {
         if (root == null) {
             return 0;
         }
-        return Math.max(this.dfsRecur(root.left), this.dfsRecur(root.right)) + 1;
+        return Math.max(this.helper.apply(root.left), this.helper.apply(root.right)) + 1;
+    };
+
+    int dfsRecur(TreeNode root) {
+        return this.helper.apply(root);
     }
 
     int bfsIter1(TreeNode root) {
