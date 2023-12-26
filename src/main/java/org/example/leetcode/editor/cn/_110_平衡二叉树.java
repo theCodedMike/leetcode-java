@@ -63,10 +63,7 @@ public class _110_平衡二叉树 {
         int r_height = (int) r_res[0];
         boolean r_bal = (boolean) r_res[1];
 
-        l_res[0] = Math.max(l_height, r_height) + 1;
-        l_res[1] = l_bal && r_bal && Math.abs(l_height - r_height) <= 1;
-
-        return l_res;
+        return new Object[]{Math.max(l_height, r_height) + 1, l_bal && r_bal && Math.abs(l_height - r_height) <= 1};
     };
 
     /**
