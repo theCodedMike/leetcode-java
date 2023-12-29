@@ -40,7 +40,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+public class _513_找树左下角的值 {
     public int findBottomLeftValue(TreeNode root) {
         //return this.dfsRecur(root);
         //return this.dfsIter(root);
@@ -67,6 +67,9 @@ class Solution {
         this.recur.accept(root.right, level + 1, val);
     };
 
+    /**
+     * 深度优先搜索 - 递归(前序遍历)
+     */
     int dfsRecur(TreeNode root) {
         int[] val = new int[] {0, Integer.MIN_VALUE};
 
@@ -75,6 +78,9 @@ class Solution {
         return val[0];
     }
 
+    /**
+     * 深度优先搜索 - 迭代(前序遍历)
+     */
     int dfsIter(TreeNode root) {
         int val = 0;
         int val_level = Integer.MIN_VALUE;
@@ -103,6 +109,9 @@ class Solution {
         return val;
     }
 
+    /**
+     * 广度优先搜索 - 迭代(层序遍历)
+     */
     int bfsIter1(TreeNode root) {
         int val = 0;
         Deque<TreeNode> queue = new ArrayDeque<>() {{
@@ -130,6 +139,9 @@ class Solution {
         return val;
     }
 
+    /**
+     * 广度优先搜索 - 迭代(层序遍历)
+     */
     int bfsIter2(TreeNode root) {
         int val = 0;
         int prevLevel = -1;
