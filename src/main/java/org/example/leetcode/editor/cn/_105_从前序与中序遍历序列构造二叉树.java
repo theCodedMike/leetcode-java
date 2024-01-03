@@ -67,12 +67,11 @@ public class _105_从前序与中序遍历序列构造二叉树 {
         int idxAtInorder = inorder.indexOf(rootVal);
         List<Integer> leftInorder = inorder.subList(0, idxAtInorder);
         List<Integer> rightInorder = inorder.subList(idxAtInorder + 1, inorder.size());
-        preorder = preorder.subList(1, preorder.size());
-        List<Integer> leftPreOrder = preorder.subList(0, leftInorder.size());
-        List<Integer> rightPreOrder = preorder.subList(leftInorder.size(), preorder.size());
+        List<Integer> leftPreorder = preorder.subList(1, 1 + leftInorder.size());
+        List<Integer> rightPreorder = preorder.subList(1 + leftInorder.size(), size);
 
-        root.left = this.helper1.apply(leftPreOrder, leftInorder);
-        root.right = this.helper1.apply(rightPreOrder, rightInorder);
+        root.left = this.helper1.apply(leftPreorder, leftInorder);
+        root.right = this.helper1.apply(rightPreorder, rightInorder);
 
         return root;
     };
@@ -102,16 +101,15 @@ public class _105_从前序与中序遍历序列构造二叉树 {
 
         int idxAtInorder = map.get(rootVal);
         int leftInorderSize = idxAtInorder - inorderLIdx;
-        int rightInorderSize = inorderRIdx - idxAtInorder - 1;
 
         root.left = this.helper2.apply(preorder, preorderLIdx + 1, preorderLIdx + 1 + leftInorderSize, inorder, inorderLIdx, idxAtInorder, map);
-        root.right = this.helper2.apply(preorder, preorderRIdx - rightInorderSize, preorderRIdx, inorder, idxAtInorder + 1, inorderRIdx, map);
+        root.right = this.helper2.apply(preorder, preorderLIdx + 1 + leftInorderSize, preorderRIdx, inorder, idxAtInorder + 1, inorderRIdx, map);
         return root;
     };
 
     TreeNode recur2(int[] preorder, int[] inorder) {
         int size = preorder.length;
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>(size);
         for (int i = 0; i < size; i++) {
             map.put(inorder[i], i);
         }
