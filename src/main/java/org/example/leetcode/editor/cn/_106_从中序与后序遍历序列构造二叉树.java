@@ -74,6 +74,7 @@ public class _106_从中序与后序遍历序列构造二叉树 {
 
         return root;
     };
+
     TreeNode recur1(int[] _inorder, int[] _postorder) {
         List<Integer> inorder = Arrays.stream(_inorder).boxed().collect(Collectors.toList());
         List<Integer> postorder = Arrays.stream(_postorder).boxed().collect(Collectors.toList());
@@ -87,24 +88,33 @@ public class _106_从中序与后序遍历序列构造二叉树 {
 
     SeptFunction<int[], Integer, Integer, int[], Integer, Integer, Map<Integer, Integer>, TreeNode> helper2 =
             (postorder, postorderLIdx, postorderRIdx, inorder, inorderLIdx, inorderRIdx, map) -> {
-        int size = postorderRIdx - postorderLIdx;
-        if (size == 0) {
-            return null;
-        }
-        int rootVal = postorder[postorderRIdx - 1];
-        TreeNode root = new TreeNode(rootVal);
-        if (size == 1) {
-            return root;
-        }
+                int size = postorderRIdx - postorderLIdx;
+                if (size == 0) {
+                    return null;
+                }
+                int rootVal = postorder[postorderRIdx - 1];
+                TreeNode root = new TreeNode(rootVal);
+                if (size == 1) {
+                    return root;
+                }
 
-        int idxAtInorder = map.get(rootVal);
-        int leftInorderSize = idxAtInorder - inorderLIdx;
+                int idxAtInorder = map.get(rootVal);
+                int leftInorderSize = idxAtInorder - inorderLIdx;
 
-        root.left = this.helper2.apply(postorder, postorderLIdx, postorderLIdx + leftInorderSize, inorder, inorderLIdx, idxAtInorder, map);
-        root.right = this.helper2.apply(postorder, postorderLIdx + leftInorderSize, postorderRIdx - 1, inorder, idxAtInorder + 1, inorderRIdx, map);
+                root.left = this.helper2.apply(
+                        postorder, postorderLIdx, postorderLIdx + leftInorderSize,
+                        inorder, inorderLIdx, idxAtInorder,
+                        map
+                );
+                root.right = this.helper2.apply(
+                        postorder, postorderLIdx + leftInorderSize, postorderRIdx - 1,
+                        inorder, idxAtInorder + 1, inorderRIdx,
+                        map
+                );
 
-        return root;
-    };
+                return root;
+            };
+
     TreeNode recur2(int[] inorder, int[] postorder) {
         int size = inorder.length;
         Map<Integer, Integer> map = new HashMap<>(size);

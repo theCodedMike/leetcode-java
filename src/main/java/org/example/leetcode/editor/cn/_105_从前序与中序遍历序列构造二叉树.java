@@ -66,7 +66,7 @@ public class _105_从前序与中序遍历序列构造二叉树 {
 
         int idxAtInorder = inorder.indexOf(rootVal);
         List<Integer> leftInorder = inorder.subList(0, idxAtInorder);
-        List<Integer> rightInorder = inorder.subList(idxAtInorder + 1, inorder.size());
+        List<Integer> rightInorder = inorder.subList(idxAtInorder + 1, size);
         List<Integer> leftPreorder = preorder.subList(1, 1 + leftInorder.size());
         List<Integer> rightPreorder = preorder.subList(1 + leftInorder.size(), size);
 
@@ -88,24 +88,34 @@ public class _105_从前序与中序遍历序列构造二叉树 {
         H apply(A a, B b, C c, D d, E e, F f, G g);
     }
 
-    SeptFunction<int[], Integer, Integer, int[], Integer, Integer, Map<Integer, Integer>, TreeNode> helper2 = (preorder, preorderLIdx, preorderRIdx, inorder, inorderLIdx, inorderRIdx, map) -> {
-        int size = preorderRIdx - preorderLIdx;
-        if (size == 0) {
-            return null;
-        }
-        int rootVal = preorder[preorderLIdx];
-        TreeNode root = new TreeNode(rootVal);
-        if (size == 1) {
-            return root;
-        }
+    SeptFunction<int[], Integer, Integer, int[], Integer, Integer, Map<Integer, Integer>, TreeNode> helper2 =
+            (preorder, preorderLIdx, preorderRIdx, inorder, inorderLIdx, inorderRIdx, map) -> {
+                int size = preorderRIdx - preorderLIdx;
+                if (size == 0) {
+                    return null;
+                }
+                int rootVal = preorder[preorderLIdx];
+                TreeNode root = new TreeNode(rootVal);
+                if (size == 1) {
+                    return root;
+                }
 
-        int idxAtInorder = map.get(rootVal);
-        int leftInorderSize = idxAtInorder - inorderLIdx;
+                int idxAtInorder = map.get(rootVal);
+                int leftInorderSize = idxAtInorder - inorderLIdx;
 
-        root.left = this.helper2.apply(preorder, preorderLIdx + 1, preorderLIdx + 1 + leftInorderSize, inorder, inorderLIdx, idxAtInorder, map);
-        root.right = this.helper2.apply(preorder, preorderLIdx + 1 + leftInorderSize, preorderRIdx, inorder, idxAtInorder + 1, inorderRIdx, map);
-        return root;
-    };
+                root.left = this.helper2.apply(
+                        preorder, preorderLIdx + 1, preorderLIdx + 1 + leftInorderSize,
+                        inorder, inorderLIdx, idxAtInorder,
+                        map
+                );
+                root.right = this.helper2.apply(
+                        preorder, preorderLIdx + 1 + leftInorderSize, preorderRIdx,
+                        inorder, idxAtInorder + 1, inorderRIdx,
+                        map
+                );
+
+                return root;
+            };
 
     TreeNode recur2(int[] preorder, int[] inorder) {
         int size = preorder.length;
