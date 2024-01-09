@@ -171,7 +171,7 @@ public class _98_验证二叉搜索树 {
             Deque<Object> stack = new ArrayDeque<>() {{
                 this.push(root);
             }};
-            
+
             while (!stack.isEmpty()) {
                 Object obj = stack.pop();
                 switch (obj) {
@@ -188,14 +188,14 @@ public class _98_验证二叉搜索树 {
                         if (!vals.isEmpty() && currVal <= vals.getLast()) {
                             return false;
                         }
-                        
+
                         vals.add(currVal);
                     }
                     default -> throw new IllegalStateException("Unexpected value: " + obj);
                 }
             }
         }
-        
+
         return true;
     }
 
