@@ -123,6 +123,14 @@ public class _501_二叉搜索树中的众数 {
                 .toArray();
     }
 
+    /**
+     * val: 正在遍历的节点的值
+     * params:
+     *   0: 当前节点的值（当前值）
+     *   1: 当前值出现的频率
+     *   2: 频率的最大值
+     * res: 最终生成的结果
+     */
     TriConsumer<Integer, int[], List<Integer>> update = (val, params, res) -> {
         if (val == params[0]) {
             params[1]++;
