@@ -60,27 +60,33 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class _144_二叉树的前序遍历 {
     public List<Integer> preorderTraversal(TreeNode root) {
-        //List<Integer> res = new ArrayList<>();
-        //this.recursionImpl(root, res);
-        //return res;
+        //return this.recursionImpl(root);
 
         //return this.iterationImpl1(root);
         //return this.iterationImpl2(root);
         //return this.iterationImpl3(root);
-        return this.iterationImpl4(root);
+        //return this.iterationImpl4(root);
+
+        return this.morrisImpl(root);
     }
 
-    void recursionImpl(TreeNode root, List<Integer> res) {
+    BiConsumer<TreeNode, List<Integer>> preorder = (root, res) -> {
         if (root == null) {
             return;
         }
 
         res.add(root.val); // 访问根节点
-        this.recursionImpl(root.left, res);  // 遍历左子树
-        this.recursionImpl(root.right, res); // 遍历右子树
+        this.preorder.accept(root.left, res);  // 遍历左子树
+        this.preorder.accept(root.right, res); // 遍历右子树
+    };
+    List<Integer> recursionImpl(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        this.preorder.accept(root, res);
+        return res;
     }
 
     List<Integer> iterationImpl1(TreeNode root) {
@@ -165,6 +171,34 @@ public class _144_二叉树的前序遍历 {
                     case Integer val -> res.add(val);
                     default -> throw new IllegalStateException("Unexpected value: " + curr);
                 }
+            }
+        }
+
+        return res;
+    }
+
+    List<Integer> morrisImpl(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+        while (root != null) {
+            TreeNode left = root.left;
+            if (left != null) {
+                TreeNode prev = left;
+                while (prev.right != null && prev.right != root) {
+                    prev = prev.right;
+                }
+
+                if (prev.right == null) {
+                    res.add(root.val);
+                    prev.right = root;
+                    root = left;
+                } else {
+                    prev.right = null;
+                    root = root.right;
+                }
+            } else {
+                res.add(root.val);
+                root = root.right;
             }
         }
 

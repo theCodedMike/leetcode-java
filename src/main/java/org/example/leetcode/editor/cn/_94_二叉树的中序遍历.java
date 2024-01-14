@@ -39,33 +39,38 @@ package org.example.leetcode.editor.cn;
 //
 // Related Topics 栈 树 深度优先搜索 二叉树 👍 1984 👎 0
 
-
 //leetcode submit region begin(Prohibit modification and deletion)
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class _94_二叉树的中序遍历 {
     public List<Integer> inorderTraversal(TreeNode root) {
-        //List<Integer> res = new ArrayList<>();
-        //this.recursionImpl(root, res);
-        //return res;
+        //return this.recursionImpl(root);
 
         //return this.iterationImpl1(root);
         //return this.iterationImpl2(root);
-        return this.iterationImpl3(root);
+        //return this.iterationImpl3(root);
+
+        return this.morrisImpl(root);
     }
 
-    void recursionImpl(TreeNode root, List<Integer> res) {
+    BiConsumer<TreeNode, List<Integer>> inorder = (root, res) -> {
         if (root == null) {
             return;
         }
 
-        this.recursionImpl(root.left, res);
+        this.inorder.accept(root.left, res);
         res.add(root.val);
-        this.recursionImpl(root.right, res);
+        this.inorder.accept(root.right, res);
+    };
+    List<Integer> recursionImpl(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        this.inorder.accept(root, res);
+        return res;
     }
 
     List<Integer> iterationImpl1(TreeNode root) {
@@ -126,6 +131,34 @@ public class _94_二叉树的中序遍历 {
                     case Integer val -> res.add(val);
                     default -> throw new IllegalStateException("Unexpected value: " + curr);
                 }
+            }
+        }
+
+        return res;
+    }
+
+    List<Integer> morrisImpl(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+        while (root != null) {
+            TreeNode left = root.left;
+            if (left != null) {
+                TreeNode prev = left;
+                while (prev.right != null && prev.right != root) {
+                    prev = prev.right;
+                }
+
+                if (prev.right == null) {
+                    prev.right = root;
+                    root = left;
+                } else {
+                    res.add(root.val);
+                    prev.right = null;
+                    root = root.right;
+                }
+            } else {
+                res.add(root.val);
+                root = root.right;
             }
         }
 

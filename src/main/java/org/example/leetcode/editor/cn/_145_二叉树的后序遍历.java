@@ -47,28 +47,34 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 
 public class _145_二叉树的后序遍历 {
     public List<Integer> postorderTraversal(TreeNode root) {
-        //List<Integer> res = new ArrayList<>();
-        //this.recursionImpl(root, res);
-        //return res;
+        //return this.recursionImpl(root);
 
         //return this.iterationImpl1(root);
         //return this.iterationImpl2(root);
         //return this.iterationImpl3(root);
-        return this.iterationImpl4(root);
+        //return this.iterationImpl4(root);
+
+        return this.morrisImpl(root);
     }
 
-    void recursionImpl(TreeNode root, List<Integer> res) {
+    BiConsumer<TreeNode, List<Integer>> postorder = (root, res) -> {
         if (root == null) {
             return;
         }
 
-        this.recursionImpl(root.left, res);
-        this.recursionImpl(root.right, res);
+        this.postorder.accept(root.left, res);
+        this.postorder.accept(root.right, res);
         res.add(root.val);
+    };
+    List<Integer> recursionImpl(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        this.postorder.accept(root, res);
+        return res;
     }
 
     List<Integer> iterationImpl1(TreeNode root) {
@@ -168,6 +174,45 @@ public class _145_二叉树的后序遍历 {
                 }
             }
         }
+
+        return res;
+    }
+
+    BiConsumer<TreeNode, List<Integer>> addPath = (root, res) -> {
+        List<Integer> path = new ArrayList<>();
+
+        while (root != null) {
+            path.add(root.val);
+            root = root.right;
+        }
+
+        res.addAll(path.reversed());
+    };
+    List<Integer> morrisImpl(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        TreeNode curr = root;
+
+        while (curr != null) {
+            TreeNode left = curr.left;
+            if (left != null) {
+                TreeNode prev = left;
+                while (prev.right != null && prev.right != curr) {
+                    prev = prev.right;
+                }
+
+                if (prev.right == null) {
+                    prev.right = curr;
+                    curr = left;
+                } else {
+                    prev.right = null;
+                    this.addPath.accept(left, res);
+                    curr = curr.right;
+                }
+            } else {
+                curr = curr.right;
+            }
+        }
+        this.addPath.accept(root, res);
 
         return res;
     }
