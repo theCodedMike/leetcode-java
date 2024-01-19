@@ -43,6 +43,7 @@ public class _669_修剪二叉搜索树 {
         return this.iterHelper(root, low, high);
     }
 
+    @FunctionalInterface
     interface TriFunction<A, B, C, D> {
         D apply(A a, B b, C c);
     }
