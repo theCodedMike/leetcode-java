@@ -59,14 +59,14 @@ public class _108_将有序数组转换为二叉搜索树 {
             return null;
         }
 
-        int rootIdx = size / 2;
-        TreeNode root = new TreeNode(nums.get(rootIdx));
+        int mid = size / 2;
+        TreeNode root = new TreeNode(nums.get(mid));
         if (size == 1) {
             return root;
         }
 
-        root.left = this.convert1.apply(nums.subList(0, rootIdx));
-        root.right = this.convert1.apply(nums.subList(rootIdx + 1, size));
+        root.left = this.convert1.apply(nums.subList(0, mid));
+        root.right = this.convert1.apply(nums.subList(mid + 1, size));
 
         return root;
     };
@@ -80,19 +80,19 @@ public class _108_将有序数组转换为二叉搜索树 {
     interface TriFunction<A, B, C, D> {
         D apply(A a, B b, C c);
     }
-    TriFunction<int[], Integer, Integer, TreeNode> convert2 = (nums, from, to) -> {
-        if (Objects.equals(from, to)) {
+    TriFunction<int[], Integer, Integer, TreeNode> convert2 = (nums, left, right) -> {
+        if (Objects.equals(left, right)) {
             return null;
         }
 
-        int rootIdx = (from + to) / 2;
-        TreeNode root = new TreeNode(nums[rootIdx]);
-        if (to - from == 1) {
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        if (right - left == 1) {
             return root;
         }
 
-        root.left = this.convert2.apply(nums, from, rootIdx);
-        root.right = this.convert2.apply(nums, rootIdx + 1, to);
+        root.left = this.convert2.apply(nums, left, mid);
+        root.right = this.convert2.apply(nums, mid + 1, right);
 
         return root;
     };
