@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+public class _47_全排列II {
     public List<List<Integer>> permuteUnique(int[] nums) {
         //return this.backtracking(nums);
 
