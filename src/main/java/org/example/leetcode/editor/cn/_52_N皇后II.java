@@ -45,6 +45,7 @@ public class _52_N皇后II {
         return this.backtracking(n);
     }
 
+    @FunctionalInterface
     interface QuadrConsumer<A, B, C, D> {
         void accept(A a, B b, C c, D d);
     }
@@ -59,10 +60,12 @@ public class _52_N皇后II {
                 for (int col = 0; col < len; col++) {
                     int finalCol = col;
                     if (pos.stream().anyMatch(p -> {
+                        // 同一列
                         if (p[1] == finalCol) {
                             return true;
                         }
                         double slope = (double) (row - p[0]) / (finalCol - p[1]);
+                        // 同一斜线
                         return slope == 1 || slope == -1;
                     })) {
                         continue;
