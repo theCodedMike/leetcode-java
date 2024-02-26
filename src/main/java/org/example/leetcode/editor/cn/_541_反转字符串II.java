@@ -35,8 +35,6 @@ package org.example.leetcode.editor.cn;
 // Related Topics 双指针 字符串 👍 553 👎 0
 
 
-import java.util.Arrays;
-
 //leetcode submit region begin(Prohibit modification and deletion)
 class _541_反转字符串II {
     public String reverseStr(String s, int k) {
