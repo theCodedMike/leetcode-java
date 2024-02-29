@@ -47,7 +47,9 @@ public class _455_分发饼干 {
     public int findContentChildren(int[] g, int[] s) {
         //return this.bruteForce(g, s);
 
-        return this.greedy(g, s);
+        //return this.greedy(g, s);
+
+        return this.solution3(g, s);
     }
 
     int bruteForce(int[] g, int[] s) {
@@ -92,6 +94,20 @@ public class _455_分发饼干 {
         }
 
         return res;
+    }
+
+    int solution3(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int j = 0;
+        for (int i : s) {
+            if (j < g.length && g[j] <= i) {
+                j++;
+            }
+        }
+
+        return j;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
