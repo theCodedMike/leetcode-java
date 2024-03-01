@@ -46,7 +46,7 @@ package org.example.leetcode.editor.cn;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+public class _860_柠檬水找零 {
     public boolean lemonadeChange(int[] bills) {
         return this.greedy(bills);
     }
